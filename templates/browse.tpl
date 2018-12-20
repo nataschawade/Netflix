@@ -10,5 +10,5 @@
         </div>
         <h3 class="show-name">{{show['name']}}</h3>
     </article>
-% end
+    % end
 </div>
