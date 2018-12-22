@@ -4,28 +4,22 @@ from bottle import (get, request, route, run, static_file,
 import utils
 import json
 
-# Static Routes
-
 @get("/js/<filepath:re:.*\.js>")
 def js(filepath):
     return static_file(filepath, root="./js")
-
 
 @get("/css/<filepath:re:.*\.css>")
 def css(filepath):
     return static_file(filepath, root="./css")
 
-
 @get("/images/<filepath:re:.*\.(jpg|png|gif|ico|svg)>")
 def img(filepath):
     return static_file(filepath, root="./images")
-
 
 @route('/')
 def index():
     sectionTemplate = "./templates/home.tpl"
     return template("./pages/index.html", version=utils.getVersion(), sectionTemplate=sectionTemplate, sectionData={})
-
 
 @route('/<name>')
 def browse(name):
@@ -66,8 +60,6 @@ def show(show_number, episode_number):
     return template("./pages/index.html", version=utils.getVersion(), sectionTemplate=sectionTemplate,
                     sectionData=episode_shown)
 
-
-
 @route('/ajax/show/<show_number>/episode/<episode_number>')
 def show(show_number, episode_number):
     show = json.loads(utils.getJsonFromFile(show_number))
@@ -77,12 +69,10 @@ def show(show_number, episode_number):
             result_episode = episode
     return template("./templates/episode.tpl", result=result_episode)
 
-
 @route('/search')
 def search_page():
     sectionTemplate = "./templates/search.tpl"
     return template("./pages/index.html", version=utils.getVersion(), sectionTemplate=sectionTemplate, sectionData={})
-
 
 @route('/search', method="POST")
 def search_page():
